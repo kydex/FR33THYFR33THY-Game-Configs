@@ -116,5 +116,7 @@ Clear-Host
 # download and replace config files
 Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Battlefield%202042/user.cfg" -File "$ConfigFolder1\user.cfg"
 Clear-Host
+# delete shader cache
+Remove-Item -Path "$env:LOCALAPPDATA\BattlefieldGameData.kin-release.Win32" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
 Write-Host "Config applied . . ."
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
