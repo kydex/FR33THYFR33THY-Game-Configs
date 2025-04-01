@@ -118,4 +118,5 @@ Clear-Host
 Write-Host "Delta Force config applied . . ."
 Write-Host ""
 Write-Host "Try -dx11 launch option in game launcher"
+Write-Host "NVIDIA Reflex negatively impacts FPS and 1% lows, leave it off"
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
