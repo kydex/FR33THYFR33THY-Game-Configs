@@ -95,8 +95,8 @@
     }
 
 # create config folder
-New-Item -Path "$env:USERPROFILE\Documents" -Name "BFBC2" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
-New-Item -Path "$env:USERPROFILE\OneDrive\Documents" -Name "BFBC2" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+New-Item -Path "$env:USERPROFILE\Documents\BFBC2" -Name "input" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+New-Item -Path "$env:USERPROFILE\OneDrive\Documents\BFBC2" -Name "input" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 Clear-Host
 # download and replace config files           
 Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Battlefield/Battlefield%20Bad%20Company%202/settings.ini" -File "$env:TEMP\settings.ini"
@@ -113,6 +113,13 @@ Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/
 Copy-Item -Path "$env:TEMP\GameSettings.bin" -Destination "$env:USERPROFILE\Documents\BFBC2\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
 Copy-Item -Path "$env:TEMP\GameSettings.bin" -Destination "$env:USERPROFILE\OneDrive\Documents\BFBC2\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
 Remove-Item -Path "$env:TEMP\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
+
+Clear-Host
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Battlefield/Battlefield%20Bad%20Company%202/GameSettings.bin" -File "$env:TEMP\GameSettings.bin"
+Copy-Item -Path "$env:TEMP\GameSettings.bin" -Destination "$env:USERPROFILE\Documents\BFBC2\input\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\GameSettings.bin" -Destination "$env:USERPROFILE\OneDrive\Documents\BFBC2\input\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
+Remove-Item -Path "$env:TEMP\GameSettings.bin" -Force -ErrorAction SilentlyContinue | Out-Null
+
 Clear-Host
 Write-Host "Battlefield Bad Company 2 config applied . . ."
 Write-Host ""
