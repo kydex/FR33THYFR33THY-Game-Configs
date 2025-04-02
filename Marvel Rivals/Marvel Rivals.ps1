@@ -98,7 +98,9 @@
 New-Item -Path "$env:LOCALAPPDATA\Marvel\Saved\Config" -Name "Windows" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 Clear-Host
 # download and replace config files           
-Get-FileFromWeb -URL "" -File "$env:LOCALAPPDATA\Marvel\Saved\Config\Windows"
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Marvel%20Rivals/Marvel%20Rivals/GameUserSettings.ini" -File "$env:LOCALAPPDATA\Marvel\Saved\Config\Windows\GameUserSettings.ini"
+Clear-Host
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Marvel%20Rivals/Marvel%20Rivals/Scalability.ini" -File "$env:LOCALAPPDATA\Marvel\Saved\Config\Windows\Scalability.ini"
 Clear-Host
 Write-Host "Marvel Rivals config applied . . ."
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
