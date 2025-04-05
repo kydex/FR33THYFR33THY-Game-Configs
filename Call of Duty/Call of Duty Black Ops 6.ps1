@@ -99,34 +99,42 @@ Write-Host "Run game once to generate config location"
 Write-Host ""
 Pause
 Clear-Host
-# download and replace config files       
-Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Battlefield/Battlefield%20Hardline/PROFSAVE_profile" -File "$env:TEMP\s.1.0.cod24.txt0"
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\Documents\BFH\settings\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\OneDrive\Documents\BFH\settings\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
-Remove-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
+# download config files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Black%20Ops%206/s.1.0.cod24.txt0" -File "$env:TEMP\s.1.0.cod24.txt0"
 Clear-Host
-
-
-
-
-
-
-Set "RendererWorkerCount" to cpu cores -1
-As an example 8700k has 6 cores = 5
-
-12th, 13th, 14th gen with ecores - set number as performance cores
-As an example 13900k has 8 performance cores and 16 ecores = 7
-
-7900x3d, 7950x3d if using gamebar to park cores with ccd1 on - set number as x3d cores
-As an example 7950x3d has ccd0 8 x3d cores and ccd1 8 non x3d cores = 7
-
-Variable rate shading is on for more frames
-
-If only playing mw2 turn HAGS off in windows +10fps, leave HAGS on for mw3 & bo6
-
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Black%20Ops%206/s.1.0.cod24.txt1" -File "$env:TEMP\s.1.0.cod24.txt1"
+Clear-Host
+# edit config files
+$path1 = "$env:TEMP\s.1.0.cod24.txt0"
+$path2 = "$env:TEMP\s.1.0.cod24.txt1"
+Write-Host "Set RendererWorkerCount to cpu cores -1"
+Write-Host ""
+# user input change rendererworkercount in config files
+do {
+$input = Read-Host -Prompt "RendererWorkerCount"
+} while ([string]::IsNullOrWhiteSpace($input))
+(Get-Content $path1) -replace "\$", $input | Out-File $path1
+(Get-Content $path2) -replace "\$", $input | Out-File $path2
+# convert files to utf8
+Set-Content -Path "$env:TEMP\s.1.0.cod24.txt0" -Value (Get-Content -Path "$env:TEMP\s.1.0.cod24.txt0" -Raw) -Encoding utf8
+Set-Content -Path "$env:TEMP\s.1.0.cod24.txt1" -Value (Get-Content -Path "$env:TEMP\s.1.0.cod24.txt1" -Raw) -Encoding utf8
+# move config files
+Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\Documents\Call of Duty\players\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+Remove-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Destination "$env:USERPROFILE\Documents\Call of Duty\players\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+Remove-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
+# message
 Write-Host "Call of Duty Black Ops 6 config applied . . ."
 Write-Host ""
-Write-Host "Run and reload shaders"
-Write-Host "Rebar is off in config as this causes bad 1% lows in this engine"
-Write-Host "Nvidia users can leave rebar on and disable in config, AMD GPU users please turn off in bios"
+Write-Host "Resizable-bar causes bad 1% lows in this engine"
+Write-Host "Resizable-bar turned off in config for NVIDIA GPU'S"
+Write-Host "AMD GPU users please turn off Resizable-bar in BIOS"
+Write-Host ""
+Write-Host "Always select no for Set Optimal Settings & Run In Safe Mode"
+Write-Host ""
+Write-Host "Open game, in GRAPHICS select Restart Shaders Pre-Loading then reboot game"
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
