@@ -124,7 +124,7 @@ Copy-Item -Path "$env:TEMP\options.4.cod23.cst" -Destination "$env:USERPROFILE\O
 Clear-Host
 Remove-Item -Path "$env:TEMP\options.4.cod23.cst" -Force -ErrorAction SilentlyContinue | Out-Null
 # message
-Write-Host "Call of Duty Modern Warfare 3 (2023) config applied . . ."
+Write-Host "Call of Duty Modern Warfare 3 2023 config applied . . ."
 Write-Host ""
 Write-Host "Resizable-bar causes bad 1% lows in this engine"
 Write-Host "Resizable-bar turned off in config for NVIDIA GPU'S"
