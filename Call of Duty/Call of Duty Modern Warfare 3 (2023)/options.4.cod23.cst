@@ -8,7 +8,7 @@
 VideoMemoryScale:1.0 = "0.900000" // 0.000000 to 2.000000
 
 // Thread count for handling the job queue
-RendererWorkerCount:1.0 = "7" // -1 to 16
+RendererWorkerCount:1.0 = "$" // -1 to 16
 
 // Allows non-hardware settings to be synced in with the cloud
 ConfigCloudStorageEnabled:1.0 = "false"

@@ -100,13 +100,10 @@ Write-Host ""
 Pause
 Clear-Host
 # download config files
-Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Black%20Ops%206/s.1.0.cod24.txt0" -File "$env:TEMP\s.1.0.cod24.txt0"
-Clear-Host
-Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Black%20Ops%206/s.1.0.cod24.txt1" -File "$env:TEMP\s.1.0.cod24.txt1"
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Modern%20Warfare%203%20(2023)/options.4.cod23.cst" -File "$env:TEMP\options.4.cod23.cst"
 Clear-Host
 # edit config files
-$path1 = "$env:TEMP\s.1.0.cod24.txt0"
-$path2 = "$env:TEMP\s.1.0.cod24.txt1"
+$path1 = "$env:TEMP\options.4.cod23.cst"
 Write-Host "Set RendererWorkerCount to cpu cores -1"
 Write-Host ""
 # user input change rendererworkercount in config files
@@ -114,31 +111,20 @@ do {
 $input = Read-Host -Prompt "RendererWorkerCount"
 } while ([string]::IsNullOrWhiteSpace($input))
 (Get-Content $path1) -replace "\$", $input | Out-File $path1
-(Get-Content $path2) -replace "\$", $input | Out-File $path2
 # convert files to utf8
-$content = Get-Content -Path "$env:TEMP\s.1.0.cod24.txt0" -Raw
-$filePath = "$env:TEMP\s.1.0.cod24.txt0"
-$encoding = New-Object System.Text.UTF8Encoding $false
-$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
-$writer.Write($content)
-$writer.Close()
-$content = Get-Content -Path "$env:TEMP\s.1.0.cod24.txt1" -Raw
-$filePath = "$env:TEMP\s.1.0.cod24.txt1"
+$content = Get-Content -Path "$env:TEMP\options.4.cod23.cst" -Raw
+$filePath = "$env:TEMP\options.4.cod23.cst"
 $encoding = New-Object System.Text.UTF8Encoding $false
 $writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
 $writer.Write($content)
 $writer.Close()
 # move config files
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\Documents\Call of Duty\players\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\options.4.cod23.cst" -Destination "$env:USERPROFILE\Documents\Call of Duty\players\options.4.cod23.cst" -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\options.4.cod23.cst" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players\options.4.cod23.cst" -Force -ErrorAction SilentlyContinue | Out-Null
 Clear-Host
-Remove-Item -Path "$env:TEMP\s.1.0.cod24.txt0" -Force -ErrorAction SilentlyContinue | Out-Null
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Destination "$env:USERPROFILE\Documents\Call of Duty\players\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
-Copy-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
-Clear-Host
-Remove-Item -Path "$env:TEMP\s.1.0.cod24.txt1" -Force -ErrorAction SilentlyContinue | Out-Null
+Remove-Item -Path "$env:TEMP\options.4.cod23.cst" -Force -ErrorAction SilentlyContinue | Out-Null
 # message
-Write-Host "Call of Duty Black Ops 6 config applied . . ."
+Write-Host "Call of Duty Modern Warfare 3 (2023) config applied . . ."
 Write-Host ""
 Write-Host "Resizable-bar causes bad 1% lows in this engine"
 Write-Host "Resizable-bar turned off in config for NVIDIA GPU'S"
