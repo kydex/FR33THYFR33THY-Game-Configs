@@ -100,7 +100,12 @@ Write-Host ""
 Pause
 Clear-Host
 
-
+# download config files
+# players files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20WZ%20BO6%20MW2%20MW3/players.zip" -File "$env:TEMP\players.zip"
+# yourid files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20WZ%20BO6%20MW2%20MW3/YourID.zip" -File "$env:TEMP\YourID.zip"
+# 
 # inspector
 
 
