@@ -95,6 +95,105 @@
     }
 
 # message
-Clear-Host
-Write-Host "In Progress..."
+Write-Host "Run game once to generate config location"
+Write-Host ""
 Pause
+Clear-Host
+# download rebaroffinspector files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20WZ%20BO6%20MW2%20MW3/RebarOffInspector.zip" -File "$env:TEMP\WZBO6MW2MW3\RebarOffInspector.zip"
+Clear-Host
+# download yourid files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20WZ%20BO6%20MW2%20MW3/YourID.zip" -File "$env:TEMP\WZBO6MW2MW3\YourID.zip"
+Clear-Host
+# download players files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20WZ%20BO6%20MW2%20MW3/players.zip" -File "$env:TEMP\WZBO6MW2MW3\players.zip"
+Clear-Host
+# extract rebaroffinspector files
+Expand-Archive "$env:TEMP\WZBO6MW2MW3\RebarOffInspector.zip" -DestinationPath "$env:TEMP\WZBO6MW2MW3\RebarOffInspector" -ErrorAction SilentlyContinue
+Clear-Host
+# extract yourid files
+Expand-Archive "$env:TEMP\WZBO6MW2MW3\YourID.zip" -DestinationPath "$env:TEMP\WZBO6MW2MW3\YourID" -ErrorAction SilentlyContinue
+Clear-Host
+# extract players files
+Expand-Archive "$env:TEMP\WZBO6MW2MW3\players.zip" -DestinationPath "$env:TEMP\WZBO6MW2MW3\players" -ErrorAction SilentlyContinue
+Clear-Host
+# inspector import
+Write-Host "Importing Inspector Profiles: Rebar Off. Please wait . . ."
+# unblock drs files
+$path = "C:\ProgramData\NVIDIA Corporation\Drs"
+Get-ChildItem -Path $path -Recurse | Unblock-File
+Start-Process -wait "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\Inspector.exe" -args "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\MW2.nip -silent"
+Timeout /T 3 | Out-Null
+Start-Process -wait "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\Inspector.exe" -args "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\MW3.nip -silent"
+Timeout /T 3 | Out-Null
+Start-Process -wait "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\Inspector.exe" -args "$env:TEMP\WZBO6MW2MW3\RebarOffInspector\WZBO6.nip -silent"
+Timeout /T 3 | Out-Null
+# edit config files
+$options3cod22cst = "$env:TEMP\WZBO6MW2MW3\players\options.3.cod22.cst"
+$options4cod23cst = "$env:TEMP\WZBO6MW2MW3\players\options.4.cod23.cst"
+$s10cod24txt0 = "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt0"
+$s10cod24txt1 = "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt1"
+# user input change rendererworkercount in config files
+Write-Host "Set RendererWorkerCount to cpu cores -1"
+Write-Host ""
+do {
+$input = Read-Host -Prompt "RendererWorkerCount"
+} while ([string]::IsNullOrWhiteSpace($input))
+(Get-Content $options3cod22cst) -replace "\$", $input | Out-File $options3cod22cst
+(Get-Content $options4cod23cst) -replace "\$", $input | Out-File $options4cod23cst
+(Get-Content $s10cod24txt0) -replace "\$", $input | Out-File $s10cod24txt0
+(Get-Content $s10cod24txt1) -replace "\$", $input | Out-File $s10cod24txt1
+# convert options.3.cod22.cst to utf8
+$content = Get-Content -Path "$env:TEMP\WZBO6MW2MW3\players\options.3.cod22.cst" -Raw
+$filePath = "$env:TEMP\WZBO6MW2MW3\players\options.3.cod22.cst"
+$encoding = New-Object System.Text.UTF8Encoding $false
+$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
+$writer.Write($content)
+$writer.Close()
+# convert options.4.cod23.cst to utf8
+$content = Get-Content -Path "$env:TEMP\WZBO6MW2MW3\players\options.4.cod23.cst" -Raw
+$filePath = "$env:TEMP\WZBO6MW2MW3\players\options.4.cod23.cst"
+$encoding = New-Object System.Text.UTF8Encoding $false
+$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
+$writer.Write($content)
+$writer.Close()
+# convert s.1.0.cod24.txt0 to utf8
+$content = Get-Content -Path "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt0" -Raw
+$filePath = "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt0"
+$encoding = New-Object System.Text.UTF8Encoding $false
+$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
+$writer.Write($content)
+$writer.Close()
+# convert s.1.0.cod24.txt1 to utf8
+$content = Get-Content -Path "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt1" -Raw
+$filePath = "$env:TEMP\WZBO6MW2MW3\players\s.1.0.cod24.txt1"
+$encoding = New-Object System.Text.UTF8Encoding $false
+$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
+$writer.Write($content)
+$writer.Close()
+# copy move players folder
+Copy-Item -Path "$env:TEMP\WZBO6MW2MW3\players\*" -Destination "$env:USERPROFILE\Documents\Call of Duty\players" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\WZBO6MW2MW3\players\*" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty\players" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+# pick yourid folder
+Write-Host "In 'Documents\Call of Duty\players' select 'YourID' folder:"
+$ConfigFolder1 = Show-ModernFilePicker -Mode Folder
+Clear-Host
+# copy move yourid files
+Copy-Item -Path "$env:TEMP\WZBO6MW2MW3\YourID\*" -Destination "$ConfigFolder1" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+# delete wzbo6mw2mw3 folder
+Remove-Item "$env:TEMP\WZBO6MW2MW3" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+# message
+Write-Host "Call of Duty WZ BO6 MW2 MW3 config applied . . ."
+Write-Host ""
+Write-Host "Resizable-bar causes bad 1% lows in this engine"
+Write-Host "Resizable-bar is turned off in Config & Inspector for NVIDIA GPU'S"
+Write-Host "AMD GPU users please turn off Resizable-bar in BIOS"
+Write-Host ""
+Write-Host "Turn HAGS off ONLY in MW2 for more FPS"
+Write-Host ""
+Write-Host "Always select no for Set Optimal Settings & Run In Safe Mode"
+Write-Host ""
+Write-Host "Open game, in GRAPHICS select Restart Shaders Pre-Loading then reboot game"
+$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
