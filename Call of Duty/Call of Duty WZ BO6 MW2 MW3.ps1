@@ -193,7 +193,7 @@ Write-Host "AMD GPU users please turn off Resizable-bar in BIOS"
 Write-Host ""
 Write-Host "Turn HAGS off ONLY in MW2 for more FPS"
 Write-Host ""
-Write-Host "Always select no for Set Optimal Settings & Run In Safe Mode"
+Write-Host "Always select 'no' for 'Set Optimal Settings & Run In Safe Mode'"
 Write-Host ""
 Write-Host "Open game, in GRAPHICS select Restart Shaders Pre-Loading then reboot game"
 $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
