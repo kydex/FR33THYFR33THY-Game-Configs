@@ -93,8 +93,52 @@
     }
     return $OpenFileDialog.FileName
     }
+	
+# create config folder
+New-Item -Path "$env:USERPROFILE\Documents\Call of Duty Vanguard" -Name "players" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+New-Item -Path "$env:USERPROFILE\OneDrive\Documents\Call of Duty Vanguard" -Name "players" -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+
+# download config files
+Get-FileFromWeb -URL "https://github.com/FR33THYFR33THY/Github-Game-Configs/raw/refs/heads/main/Call%20of%20Duty/Call%20of%20Duty%20Vanguard.zip" -File "$env:TEMP\Vanguard.zip"
+Clear-Host
+
+# extract config files
+Expand-Archive "$env:TEMP\Vanguard.zip" -DestinationPath "$env:TEMP\Vanguard" -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+
+# edit config files
+$optionsvanguard = "$env:TEMP\Vanguard\players\options.Vanguard"
+
+# user input change rendererworkercount in config files
+Write-Host "Set RendererWorkerCount to cpu cores -1"
+Write-Host ""
+do {
+$input = Read-Host -Prompt "RendererWorkerCount"
+} while ([string]::IsNullOrWhiteSpace($input))
+(Get-Content $optionsvanguard) -replace "\$", $input | Out-File $optionsvanguard
+
+# convert options.vanguard to utf8
+$content = Get-Content -Path "$env:TEMP\Vanguard\players\options.Vanguard" -Raw
+$filePath = "$env:TEMP\Vanguard\players\options.Vanguard"
+$encoding = New-Object System.Text.UTF8Encoding $false
+$writer = [System.IO.StreamWriter]::new($filePath, $false, $encoding)
+$writer.Write($content)
+$writer.Close()
+
+# install config files
+Copy-Item -Path "$env:TEMP\Vanguard\players\*" -Destination "$env:USERPROFILE\Documents\Call of Duty Vanguard\players" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Copy-Item -Path "$env:TEMP\Vanguard\players\*" -Destination "$env:USERPROFILE\OneDrive\Documents\Call of Duty Vanguard\players" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Clear-Host
+
+# cleanup
+Remove-Item "$env:TEMP\Vanguard" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
+Remove-Item "$env:TEMP\Vanguard.zip" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
 
 # message
-Clear-Host
-Write-Host "In Progress..."
-Pause
+Write-Host "Call of Duty Vanguard config applied . . ."
+Write-Host ""
+Write-Host "Always select 'no' for 'Set Optimal Settings & Run In Safe Mode'"
+Write-Host ""
+Write-Host "Open game, in GRAPHICS select Restart Shaders Pre-Loading then reboot game"
+$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
