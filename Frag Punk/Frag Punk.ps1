@@ -108,6 +108,19 @@ Clear-Host
 Expand-Archive "$env:TEMP\Frag Punk.zip" -DestinationPath "$env:TEMP\Frag Punk" -ErrorAction SilentlyContinue | Out-Null
 Clear-Host
 
+# message
+Write-Host "Importing Frag Punk Inspector Profile: Rebar Off. Please wait . . ."
+Write-Host ""
+Write-Host "AMD GPU users, ignore error & press 'OK'"
+Write-Host ""
+# unblock drs files
+$path = "C:\ProgramData\NVIDIA Corporation\Drs"
+Get-ChildItem -Path $path -Recurse | Unblock-File
+# import inspector profiles
+Start-Process -wait "$env:TEMP\Frag Punk\RebarOffInspector\Inspector.exe" -args "$env:TEMP\Frag Punk\RebarOffInspector\FragPunk.nip -silent"
+Timeout /T 3 | Out-Null
+Clear-Host
+
 # install config files
 Copy-Item -Path "$env:TEMP\Frag Punk\Engine.ini" -Destination "$env:LOCALAPPDATA\FragPunk\A50\Saved\Config\WindowsClient" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
 Copy-Item -Path "$env:TEMP\Frag Punk\GameUserSettings.ini" -Destination "$env:LOCALAPPDATA\FragPunk\A50\Saved\Config\WindowsClient" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
