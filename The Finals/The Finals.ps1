@@ -112,7 +112,6 @@ Clear-Host
 
 # install config files
 Copy-Item -Path "$env:TEMP\The Finals\GameUserSettings.ini" -Destination "$env:LOCALAPPDATA\Discovery\Saved\Config\WindowsClient" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
-Copy-Item -Path "$env:TEMP\The Finals\EmbarkOptionSaveGame.sav" -Destination "$env:LOCALAPPDATA\Discovery\Saved\SaveGames" -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
 Clear-Host
 
 # cleanup
